@@ -90,16 +90,18 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_TestParse:
                 Log.d(tag, "Running Test for Parse");
 
+                String description = "This is just a test";
+
                 ParseObject parseLibraryItem = new ParseObject("UserLibrary");
-                parseLibraryItem.add("id", 121);
+                parseLibraryItem.add("movieId", 121);
                 parseLibraryItem.add("runtime", 134);
                 parseLibraryItem.add("status", "released");
                 parseLibraryItem.add("name", "TestParseMovie");
                 parseLibraryItem.add("releaseDate", "2014-11-06");
                 parseLibraryItem.add("imagePath", "/7k9db7pJyTaVbz3G4eshGltivR1.jpg");
-                parseLibraryItem.add("description", "A very bland and boring movie created by Vampires");
+                parseLibraryItem.add("description", description);
                 parseLibraryItem.add("tagline", "The craziest movie ever");
-
+                parseLibraryItem.add("createdBy", ParseUser.getCurrentUser());
                 parseLibraryItem.setACL(new ParseACL(ParseUser.getCurrentUser()));
                 parseLibraryItem.saveInBackground();
 
