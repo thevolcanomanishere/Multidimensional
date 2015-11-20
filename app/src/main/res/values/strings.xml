@@ -22,4 +22,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!-- SignUp Page -->
+    <string name="emailSignUpTextHint">Email</string>
+    <string name="emailConfirmationSignUpTextHint">Email confirmation</string>
+    <string name="passwordSignUpTextHint">Password</string>
+    <string name="passwordConfirmSignUpTextHint">Password confirmation</string>
 </resources>
