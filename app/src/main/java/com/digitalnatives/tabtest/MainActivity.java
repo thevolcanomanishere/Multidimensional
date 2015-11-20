@@ -1,5 +1,6 @@
 package com.digitalnatives.tabtest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.digitalnatives.tabtest.activities.LoginActivity;
 import com.digitalnatives.tabtest.fragments.LibraryFragment;
 import com.digitalnatives.tabtest.fragments.RateFragment;
 import com.digitalnatives.tabtest.fragments.SearchFragment;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     public final String BASE_URL = "http://api.themoviedb.org/3/";
     private ParseUser user;
+    private Intent loadLauncher;
 
     public static String tag = "TabTestLog";
 
@@ -41,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        //set up TMDb API
+
+        //Parse Setup
+        ParseUser user = ParseUser.getCurrentUser();
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -85,12 +91,22 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_settings:
+          //      Intent startSettings = new Intent(this, Settings.class);
+          //      startActivity(startSettings);
+                return true;
+            case R.id.action_logout:
+                loadLauncher = new Intent(this, LoginActivity.class);
+                user.logOut();
+                Log.d(tag, "Current user = " + ParseUser.getCurrentUser());
+
+                startActivity(loadLauncher);
+            default:
+                return super.onOptionsItemSelected(item);
+
         }
 
-        return super.onOptionsItemSelected(item);
     }
 
 
