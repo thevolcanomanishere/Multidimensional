@@ -62,7 +62,7 @@ public class signup extends AppCompatActivity {
                 password = passwordEditText.getText().toString();
                 passwordConf = passwordConfEditText.getText().toString();
 
-                if (email.equals(emailConf) & password.equals(emailConf)) {
+                if (email.equals(emailConf) & password.equals(passwordConf)) {
                     //create ParseUser object
                     ParseUser user = new ParseUser();
                     user.setUsername(email);

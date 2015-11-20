@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import com.digitalnatives.tabtest.fragments.LibraryFragment;
 import com.digitalnatives.tabtest.fragments.RateFragment;
 import com.digitalnatives.tabtest.fragments.SearchFragment;
+import com.parse.ParseUser;
 
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     public final String BASE_URL = "http://api.themoviedb.org/3/";
+    private ParseUser user;
 
     public static String tag = "TabTestLog";
 
