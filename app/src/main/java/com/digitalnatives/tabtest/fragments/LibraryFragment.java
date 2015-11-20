@@ -55,7 +55,7 @@ public class LibraryFragment extends Fragment{
         libraryList.add(new LibraryItem("Bling blang bloom whats up", 234, "/7k9db7pJyTaVbz3G4eshGltivR1.jpg", "Monsters. Inc", "Releasedate", 148, "released", "2010-20-12"));
 
 
-
+        
 
 
     }

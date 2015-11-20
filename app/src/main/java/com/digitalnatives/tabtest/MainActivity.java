@@ -17,10 +17,9 @@ import com.digitalnatives.tabtest.activities.LoginActivity;
 import com.digitalnatives.tabtest.fragments.LibraryFragment;
 import com.digitalnatives.tabtest.fragments.RateFragment;
 import com.digitalnatives.tabtest.fragments.SearchFragment;
+import com.parse.ParseACL;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
-
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,20 +55,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        //dummy data
-
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TMDbInterface tmDbInterface = retrofit.create(TMDbInterface.class);
-
-
-
-
     }
 
 
@@ -102,6 +87,23 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(tag, "Current user = " + ParseUser.getCurrentUser());
 
                 startActivity(loadLauncher);
+            case R.id.action_TestParse:
+                Log.d(tag, "Running Test for Parse");
+
+                ParseObject parseLibraryItem = new ParseObject("UserLibrary");
+                parseLibraryItem.add("id", 121);
+                parseLibraryItem.add("runtime", 134);
+                parseLibraryItem.add("status", "released");
+                parseLibraryItem.add("name", "TestParseMovie");
+                parseLibraryItem.add("releaseDate", "2014-11-06");
+                parseLibraryItem.add("imagePath", "/7k9db7pJyTaVbz3G4eshGltivR1.jpg");
+                parseLibraryItem.add("description", "A very bland and boring movie created by Vampires");
+                parseLibraryItem.add("tagline", "The craziest movie ever");
+
+                parseLibraryItem.setACL(new ParseACL(ParseUser.getCurrentUser()));
+                parseLibraryItem.saveInBackground();
+
+
             default:
                 return super.onOptionsItemSelected(item);
 
