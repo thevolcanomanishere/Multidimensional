@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/e"
+            android:id="@+id/editText3"
             android:hint="@string/passwordSignUpTextHint"/>
 
         <EditText
