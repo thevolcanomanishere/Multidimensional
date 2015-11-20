@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.digitalnatives.tabtest.R;
+import com.parse.Parse;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
@@ -54,10 +56,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    private String tag = "LoginActityTag";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //parse enable Datastore test 1
+        Log.d(tag, "The class is run first");
+
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "CqyuqfAKTmdVZ5EwzsFTTWfs4xjVz2UjGrNcCNTj", "8gEZBpBpGN0FJT0E3A5foYusxoiPucfdmZRhIzQ9");
 
         //parse Test
         ParseObject testObject = new ParseObject("TestObject");
