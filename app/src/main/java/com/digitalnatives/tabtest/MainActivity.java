@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         TMDbInterface tmDbInterface = retrofit.create(TMDbInterface.class);
 
-        // first test of the VCS integration in Android studio
 
 
 
