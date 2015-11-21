@@ -31,4 +31,8 @@
     <string name="emailConfirmationSignUpTextHint">Email confirmation</string>
     <string name="passwordSignUpTextHint">Password</string>
     <string name="passwordConfirmSignUpTextHint">Password confirmation</string>
+
+    <!-- Rate Page -->
+    <string name="timerButtonStart">Start</string>
+    <string name="timerButtonStop">Stop</string>
 </resources>

@@ -5,24 +5,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.digitalnatives.tabtest.R;
+import com.google.common.base.Stopwatch;
 
 /**
  * Created by alexmcgonagle on 18/11/2015.
  */
 public class RateFragment extends Fragment{
 
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+        private Button timerButton;
+        private Button pauseButton;
+        private TextView timerText;
+        private Stopwatch stopwatch;
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
+
         public static RateFragment newInstance(int sectionNumber) {
             RateFragment fragment = new RateFragment();
             Bundle args = new Bundle();

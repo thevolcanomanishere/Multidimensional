@@ -26,10 +26,13 @@ import java.util.List;
 public class SearchFragment extends Fragment {
 
     EditText searchTextEdit;
-    Button searchButton;
+    private Button searchButton;
     private List<Movie> movies;
     private Context context;
     private static final String ARG_SECTION_NUMBER = "section_number";
+
+    //testing
+    private int btnCount = 0;
 
     public static SearchFragment newInstance(int sectionNumber) {
         SearchFragment fragment = new SearchFragment();
@@ -48,30 +51,30 @@ public class SearchFragment extends Fragment {
 
         movies = new ArrayList<>();
         movies.add(new Movie("Bling blang bloom whats up", 234, "/7k9db7pJyTaVbz3G4eshGltivR1.jpg", "Monsters. Inc", 132, "2010-11-23", "released", "This is the tagline"));
-        movies.add(new Movie("Bling number 2", 212, "/7k9db7pJyTaVbz3G4eshGltivR1.jpg", "Monsters. Inc", 132, "2010-11-23", "released", "This is the tagline"));
-        movies.add(new Movie("Bling Number3", 233, "/7k9db7pJyTaVbz3G4eshGltivR1.jpg", "Monsters. Inc", 132, "2010-11-23", "released", "This is the tagline"));
-
-
 
 
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.search_fragment, container, false);
 
-        RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv);
+
+        final RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv);
+
+        if(btnCount == 0){
+            rv.setVisibility(View.GONE);
+        }
+
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
         SearchViewAdapter rva = new SearchViewAdapter(movies, context);
         Log.d(MainActivity.tag, movies.toString());
         rv.setAdapter(rva);
         rv.setHasFixedSize(true);
-
-
-
 
         searchButton = (Button) rootView.findViewById(R.id.button);
         searchTextEdit = (EditText) rootView.findViewById(R.id.searchText);
@@ -83,7 +86,8 @@ public class SearchFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                    btnCount++;
+                rv.setVisibility(View.VISIBLE);
             }
         });
 
