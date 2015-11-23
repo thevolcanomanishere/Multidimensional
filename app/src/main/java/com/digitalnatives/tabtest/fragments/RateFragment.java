@@ -2,6 +2,7 @@ package com.digitalnatives.tabtest.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,10 @@ import com.google.common.base.Stopwatch;
  */
 public class RateFragment extends Fragment{
 
-        private Button timerButton;
+        private Button startButton;
         private Button pauseButton;
         private TextView timerText;
-        private Stopwatch stopwatch;
+        private String tag = "RateFragTip";
 
         private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -39,6 +40,9 @@ public class RateFragment extends Fragment{
         public void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
 
+
+
+
         }
 
 
@@ -47,6 +51,28 @@ public class RateFragment extends Fragment{
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.rate_fragment, container, false);
+
+            final Stopwatch stopwatch = new Stopwatch();
+
+
+            pauseButton = (Button) rootView.findViewById(R.id.button5);
+            startButton = (Button) rootView.findViewById(R.id.button4);
+
+            startButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    stopwatch.start();
+                }
+            });
+
+            pauseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    stopwatch.stop();
+                    Log.d(tag, "Timer count:" + stopwatch.toString(5));
+                    stopwatch.reset();
+                }
+            });
 
             return rootView;
         }
