@@ -69,6 +69,7 @@ public class SearchFragment extends Fragment {
             rv.setVisibility(View.GONE);
         }
 
+        //Set layout manager for RecyclerView adapter
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
         SearchViewAdapter rva = new SearchViewAdapter(movies, context);
@@ -78,7 +79,6 @@ public class SearchFragment extends Fragment {
 
         searchButton = (Button) rootView.findViewById(R.id.button);
         searchTextEdit = (EditText) rootView.findViewById(R.id.searchText);
-
 
 
 

@@ -92,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
 
                 String description = "This is just a test";
 
-                ParseObject parseLibraryItem = new ParseObject("UserLibrary");
+                ParseObject parseLibraryItem = new ParseObject("ItemTest3");
                 parseLibraryItem.add("movieId", 121);
                 parseLibraryItem.add("runtime", 134);
-                parseLibraryItem.add("status", "released");
+                parseLibraryItem.add("status", "not working");
                 parseLibraryItem.add("name", "TestParseMovie");
                 parseLibraryItem.add("releaseDate", "2014-11-06");
                 parseLibraryItem.add("imagePath", "/7k9db7pJyTaVbz3G4eshGltivR1.jpg");
