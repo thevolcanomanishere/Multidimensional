@@ -2,7 +2,6 @@ package com.digitalnatives.tabtest.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,24 +54,25 @@ public class RateFragment extends Fragment{
             final Stopwatch stopwatch = new Stopwatch();
 
 
-            pauseButton = (Button) rootView.findViewById(R.id.button5);
             startButton = (Button) rootView.findViewById(R.id.button4);
 
             startButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     stopwatch.start();
+                    startButton.setText("Stop");
                 }
             });
 
-            pauseButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    stopwatch.stop();
-                    Log.d(tag, "Timer count:" + stopwatch.toString(5));
-                    stopwatch.reset();
-                }
-            });
+            //old pause button implementation
+//            pauseButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    stopwatch.stop();
+//                    Log.d(tag, "Timer count:" + stopwatch.toString(5));
+//                    stopwatch.reset();
+//                }
+//            });
 
             return rootView;
         }

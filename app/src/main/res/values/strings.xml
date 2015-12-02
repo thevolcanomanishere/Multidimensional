@@ -5,13 +5,10 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
 
-    <string name="action_Test">Test</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_Test" translatable="false">Test</string>
 
     <string name="searchText">Search</string>
-    <string name="title_activity_auth">AuthActivity</string>
+    <string name="title_activity_auth" translatable="false">AuthActivity</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -35,4 +32,7 @@
     <!-- Rate Page -->
     <string name="timerButtonStart">Start</string>
     <string name="timerButtonStop">Stop</string>
+    <string name="tablibrary">Library</string>
+    <string name="tabRate">Rate</string>
+    <string name="tabSearch">Search</string>
 </resources>

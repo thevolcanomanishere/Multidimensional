@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Waverate</string>
+    <string name="action_logout">Ausloggin</string>
+    <string name="action_settings">Beshriften</string>
+    <string name="action_sign_in">In Loggin</string>
+    <string name="emailConfirmationSignUpTextHint">Email richtig</string>
+    <string name="emailSignUpTextHint">Email</string>
+    <string name="error_field_required">Dis fielt is requiriet</string>
+    <string name="error_incorrect_password">Der passwort is nicht gut</string>
+    <string name="error_invalid_email">Die email is nicht gut</string>
+    <string name="error_invalid_password">Der passwort is shermtiz</string>
+    <string name="passwordConfirmSignUpTextHint">Passwort confirmt</string>
+    <string name="passwordSignUpTextHint">Passwort</string>
+    <string name="permission_rationale">Shnitzel</string>
+    <string name="prompt_email">Emailzeit</string>
+    <string name="prompt_password">Passwort</string>
+    <string name="searchText">Searchen</string>
+    <string name="section_format">Nill</string>
+    <string name="timerButtonStart">Anfang</string>
+    <string name="timerButtonStop">Stopp</string>
+    <string name="title_activity_auth"></string>
+    <string name="title_activity_login" translatable="false">Anmelden</string>
+    <string name="tabSearch">Suche</string>
+    <string name="tabRate">Werten</string>
+    <string name="tablibrary">Bibilothek</string>
+</resources>

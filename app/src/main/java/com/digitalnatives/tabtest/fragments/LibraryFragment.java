@@ -48,7 +48,10 @@ public class LibraryFragment extends Fragment{
         super.onCreate(savedInstanceState);
 
         libraryList = new ArrayList<>();
-        libraryList.add(new LibraryItem("Bling blang bloom whats up", 234, "/7k9db7pJyTaVbz3G4eshGltivR1.jpg", "Monsters. Inc", "Releasedate", 148, "released", "2010-20-12"));
+
+        for (int i = 0; i < 10; i++) {
+            libraryList.add(new LibraryItem("Bling blang bloom whats up", 234, "/7k9db7pJyTaVbz3G4eshGltivR1.jpg", "Monsters. Inc", "Releasedate", 148, "released", "2010-20-12"));
+        }
 
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("UserLibrary");

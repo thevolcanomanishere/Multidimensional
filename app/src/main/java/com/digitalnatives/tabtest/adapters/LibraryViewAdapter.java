@@ -37,7 +37,6 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
         protected TextView movieName;
         protected TextView rateDate;
         protected ImageView poster;
-        protected ImageView rateGraph;
 
         LibraryViewHolder(View itemView){
             super(itemView);
@@ -45,7 +44,6 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             movieName = (TextView)itemView.findViewById(R.id.movieName);
             poster = (ImageView)itemView.findViewById(R.id.poster);
             rateDate = (TextView)itemView.findViewById(R.id.rateDate);
-            rateGraph = (ImageView)itemView.findViewById(R.id.rateGraph);
         }
 
     }
@@ -63,7 +61,6 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
         libraryViewHolder.movieName.setText(mi.getName());
         libraryViewHolder.rateDate.setText(mi.getRateDate());
         libraryViewHolder.poster.setImageResource(R.drawable.monsters);
-        libraryViewHolder.rateGraph.setImageResource(R.drawable.rategraph);
 
     }
 
