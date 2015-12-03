@@ -9,7 +9,7 @@
 
     <string name="searchText">Search</string>
     <string name="title_activity_auth" translatable="false">AuthActivity</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Waverate</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
