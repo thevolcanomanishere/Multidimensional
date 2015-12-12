@@ -35,4 +35,5 @@
     <string name="tablibrary">Library</string>
     <string name="tabRate">Rate</string>
     <string name="tabSearch">Search</string>
+    <string name="title_activity_library_view">LibraryViewActivity</string>
 </resources>
