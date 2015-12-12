@@ -17,15 +17,13 @@ import com.digitalnatives.tabtest.activities.LoginActivity;
 import com.digitalnatives.tabtest.fragments.LibraryFragment;
 import com.digitalnatives.tabtest.fragments.RateFragment;
 import com.digitalnatives.tabtest.fragments.SearchFragment;
-import com.parse.ParseACL;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
+    public static ViewPager mViewPager;
     public final String BASE_URL = "http://api.themoviedb.org/3/";
     private ParseUser user;
     private Intent loadLauncher;
@@ -92,18 +90,18 @@ public class MainActivity extends AppCompatActivity {
 
                 String description = "This is just a test";
 
-                ParseObject parseLibraryItem = new ParseObject("ItemTest3");
-                parseLibraryItem.add("movieId", 121);
-                parseLibraryItem.add("runtime", 134);
-                parseLibraryItem.add("status", "not working");
-                parseLibraryItem.add("name", "TestParseMovie");
-                parseLibraryItem.add("releaseDate", "2014-11-06");
-                parseLibraryItem.add("imagePath", "/7k9db7pJyTaVbz3G4eshGltivR1.jpg");
-                parseLibraryItem.add("description", description);
-                parseLibraryItem.add("tagline", "The craziest movie ever");
-                parseLibraryItem.add("createdBy", ParseUser.getCurrentUser());
-                parseLibraryItem.setACL(new ParseACL(ParseUser.getCurrentUser()));
-                parseLibraryItem.saveInBackground();
+//                ParseObject parseLibraryItem = new ParseObject("ItemTest3");
+//                parseLibraryItem.add("movieId", 121);
+//                parseLibraryItem.add("runtime", 134);
+//                parseLibraryItem.add("status", "not working");
+//                parseLibraryItem.add("name", "TestParseMovie");
+//                parseLibraryItem.add("releaseDate", "2014-11-06");
+//                parseLibraryItem.add("imagePath", "/7k9db7pJyTaVbz3G4eshGltivR1.jpg");
+//                parseLibraryItem.add("description", description);
+//                parseLibraryItem.add("tagline", "The craziest movie ever");
+//                parseLibraryItem.add("createdBy", ParseUser.getCurrentUser());
+//                parseLibraryItem.setACL(new ParseACL(ParseUser.getCurrentUser()));
+//                parseLibraryItem.saveInBackground();
 
 
             default:

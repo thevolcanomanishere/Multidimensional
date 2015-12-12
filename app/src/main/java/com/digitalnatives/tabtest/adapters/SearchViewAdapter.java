@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.digitalnatives.tabtest.MainActivity;
 import com.digitalnatives.tabtest.Movie;
 import com.digitalnatives.tabtest.R;
+import com.digitalnatives.tabtest.interfaces.ItemClickListener;
 
 import java.util.List;
 
@@ -32,7 +34,9 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
         return movies.size();
     }
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder {
+    public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        private ItemClickListener clickListener;
         protected CardView cv;
         protected TextView movieName;
         protected TextView releaseDate;
@@ -40,13 +44,23 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
 
         MovieViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             cv = (CardView)itemView.findViewById(R.id.cv);
             movieName = (TextView)itemView.findViewById(R.id.movieName);
             releaseDate = (TextView)itemView.findViewById(R.id.releaseDate);
             poster = (ImageView)itemView.findViewById(R.id.poster);
         }
 
+        public void setClickListener(ItemClickListener itemClickListener) {
+            this.clickListener = itemClickListener;
+        }
+        @Override
+        public void onClick(View view) {
+            clickListener.onClick(view, getAdapterPosition());
+        }
+
     }
+
 
         @Override
         public MovieViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -56,8 +70,14 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
         }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder movieViewHolder, int i) {
+    public void onBindViewHolder(final MovieViewHolder movieViewHolder, int i) {
         Movie mi = movies.get(i);
+        movieViewHolder.setClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                MainActivity.mViewPager.setCurrentItem(1);
+            }
+        });
         movieViewHolder.movieName.setText(mi.getName());
         movieViewHolder.releaseDate.setText(mi.getReleaseDate());
         movieViewHolder.poster.setImageResource(R.drawable.monsters);
