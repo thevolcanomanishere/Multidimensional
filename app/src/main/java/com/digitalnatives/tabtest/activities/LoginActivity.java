@@ -27,13 +27,15 @@ public class LoginActivity extends AppCompatActivity{
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
     private String username;
     private String password;
+
     private Button signUpLoad;
     private Button signInButton;
+    private Button skipLoginBtn;
+
     private Intent signUpIntent;
-
-
     private Intent mainActivityIntent;
     private String tag = "LoginActityTag";
 
@@ -64,6 +66,16 @@ public class LoginActivity extends AppCompatActivity{
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         signInButton = (Button)findViewById(R.id.signin);
+
+        //remove in final
+        skipLoginBtn = (Button) findViewById(R.id.skipLoginBtn);
+        skipLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(mainActivityIntent);
+            }
+        });
+
 
         signUpLoad = (Button) findViewById(R.id.button3);
         signUpIntent = new Intent(this, signup.class);

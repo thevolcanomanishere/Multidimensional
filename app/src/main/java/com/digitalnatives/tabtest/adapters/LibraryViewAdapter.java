@@ -1,6 +1,7 @@
 package com.digitalnatives.tabtest.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,11 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.digitalnatives.tabtest.LibraryItem;
 import com.digitalnatives.tabtest.R;
+import com.digitalnatives.tabtest.activities.LibraryViewActivity;
 import com.digitalnatives.tabtest.interfaces.ItemClickListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -23,6 +25,12 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
 
     public List<LibraryItem> movies;
     private Context mContext;
+    private static Intent loadLibraryItem;
+
+    //TMDb info
+    private String baseImgUrl
+            = "http://image.tmdb.org/t/p/w185";
+    private String key = "?api_key=72508de530eba41fb571b4a5b10dd99b";
 
     public LibraryViewAdapter(List<LibraryItem> movies, Context context){
         this.movies = movies;
@@ -39,8 +47,9 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
         private ItemClickListener clickListener;
         protected CardView cv;
         protected TextView movieName;
-        protected TextView rateDate;
+        protected TextView releaseDate;
         protected ImageView poster;
+        protected TextView heartRate;
 
         LibraryViewHolder(View itemView){
             super(itemView);
@@ -48,7 +57,8 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
             cv = (CardView)itemView.findViewById(R.id.cv);
             movieName = (TextView)itemView.findViewById(R.id.movieName);
             poster = (ImageView)itemView.findViewById(R.id.poster);
-            rateDate = (TextView)itemView.findViewById(R.id.rateDate);
+            releaseDate = (TextView)itemView.findViewById(R.id.releaseDate);
+            heartRate = (TextView)itemView.findViewById(R.id.heartrate);
         }
 
         public void setClickListener(ItemClickListener itemClickListener) {
@@ -57,7 +67,10 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
         @Override
         public void onClick(View view) {
            // clickListener.onClick(view, getAdapterPosition());
-            Toast.makeText(view.getContext(), "Test", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(view.getContext(), "Test", Toast.LENGTH_SHORT).show();
+            loadLibraryItem = new Intent(view.getContext(), LibraryViewActivity.class);
+//            loadLibraryItem.putExtra("MovieId", )
+            view.getContext().startActivity(loadLibraryItem);
         }
 
     }
@@ -73,8 +86,12 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
     public void onBindViewHolder(LibraryViewHolder libraryViewHolder, int i){
         LibraryItem mi = movies.get(i);
         libraryViewHolder.movieName.setText(mi.getName());
-        libraryViewHolder.rateDate.setText(mi.getRateDate());
-        libraryViewHolder.poster.setImageResource(R.drawable.monsters);
+        libraryViewHolder.releaseDate.setText(mi.getReleaseDate());
+
+        //get image with picasso
+        String imgUrl = mi.getImage_url();
+        Picasso.with(mContext).load(baseImgUrl + imgUrl + key).into(libraryViewHolder.poster);
+        libraryViewHolder.heartRate.setText(mi.getHeartRateAverage() + " bpm");
 
     }
 

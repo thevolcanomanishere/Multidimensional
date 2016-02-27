@@ -1,18 +1,22 @@
 package com.digitalnatives.tabtest.adapters;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitalnatives.tabtest.MainActivity;
 import com.digitalnatives.tabtest.Movie;
 import com.digitalnatives.tabtest.R;
+import com.digitalnatives.tabtest.Response;
 import com.digitalnatives.tabtest.interfaces.ItemClickListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,10 +25,15 @@ import java.util.List;
  */
 public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.MovieViewHolder>{
 
-        public List<Movie> movies;
+        public List<Response.ResultsEntity> movies;
         private Context mContext;
 
-        public SearchViewAdapter(List<Movie> movies, Context context){
+        //TMDb info
+        private String baseImgUrl
+                = "http://image.tmdb.org/t/p/w185";
+        private String key = "?api_key=72508de530eba41fb571b4a5b10dd99b";
+
+        public SearchViewAdapter(List<Response.ResultsEntity> movies, Context context){
         this.movies = movies;
         this.mContext = context;
         }
@@ -41,6 +50,7 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
         protected TextView movieName;
         protected TextView releaseDate;
         protected ImageView poster;
+        protected TextView overview;
 
         MovieViewHolder(View itemView) {
             super(itemView);
@@ -49,6 +59,7 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
             movieName = (TextView)itemView.findViewById(R.id.movieName);
             releaseDate = (TextView)itemView.findViewById(R.id.releaseDate);
             poster = (ImageView)itemView.findViewById(R.id.poster);
+            overview = (TextView)itemView.findViewById(R.id.overview);
         }
 
         public void setClickListener(ItemClickListener itemClickListener) {
@@ -61,26 +72,33 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
 
     }
 
-
         @Override
         public MovieViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_item, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_item,
+                    viewGroup, false);
             MovieViewHolder mvh = new MovieViewHolder(v);
             return mvh;
         }
 
     @Override
     public void onBindViewHolder(final MovieViewHolder movieViewHolder, int i) {
-        Movie mi = movies.get(i);
+        Response.ResultsEntity mi = movies.get(i);
         movieViewHolder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 MainActivity.mViewPager.setCurrentItem(1);
             }
         });
-        movieViewHolder.movieName.setText(mi.getName());
-        movieViewHolder.releaseDate.setText(mi.getReleaseDate());
-        movieViewHolder.poster.setImageResource(R.drawable.monsters);
-
+        movieViewHolder.movieName.setText(mi.getOriginal_title());
+        movieViewHolder.releaseDate.setText(mi.getRelease_date());
+        String imgUrl = mi.getPoster_path();
+        //if there is no image url then use placeholder
+        if(imgUrl == null){
+            movieViewHolder.poster.setImageResource(R.drawable.nopicture);
+        } else {
+            //Get image url and load with picasso
+            Picasso.with(mContext).load(baseImgUrl + imgUrl + key).into(movieViewHolder.poster);
+        }
+        movieViewHolder.overview.setText(mi.getOverview());
     }
 }

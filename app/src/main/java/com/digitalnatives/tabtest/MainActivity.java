@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.digitalnatives.tabtest.activities.LoginActivity;
+import com.digitalnatives.tabtest.classes.CustomViewPager;
 import com.digitalnatives.tabtest.fragments.LibraryFragment;
 import com.digitalnatives.tabtest.fragments.RateFragment;
 import com.digitalnatives.tabtest.fragments.SearchFragment;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    public static ViewPager mViewPager;
+    public static CustomViewPager mViewPager;
     public final String BASE_URL = "http://api.themoviedb.org/3/";
     private ParseUser user;
     private Intent loadLauncher;
@@ -47,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
         ParseUser user = ParseUser.getCurrentUser();
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (CustomViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setPagingEnabled(false);
+
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

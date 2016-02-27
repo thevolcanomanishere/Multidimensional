@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.digitalnatives.tabtest.R;
-import com.google.common.base.Stopwatch;
 
 /**
  * Created by alexmcgonagle on 18/11/2015.
@@ -51,7 +50,7 @@ public class RateFragment extends Fragment{
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.rate_fragment, container, false);
 
-            final Stopwatch stopwatch = new Stopwatch();
+//            final Stopwatch stopwatch = new Stopwatch();
 
 
             startButton = (Button) rootView.findViewById(R.id.button4);
@@ -59,8 +58,12 @@ public class RateFragment extends Fragment{
             startButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    stopwatch.start();
-                    startButton.setText("Stop");
+//
+                    if(startButton.getText().equals("Start")) {
+                        startButton.setText("Stop");
+                    } else {
+                        startButton.setText("Start");
+                    }
                 }
             });
 

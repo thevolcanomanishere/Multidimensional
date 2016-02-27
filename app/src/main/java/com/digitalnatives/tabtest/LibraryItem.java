@@ -1,5 +1,7 @@
 package com.digitalnatives.tabtest;
 
+import java.util.Date;
+
 /**
  * Created by alexmcgonagle on 19/11/2015.
  */
@@ -9,31 +11,20 @@ public class LibraryItem {
     private int id;
     private String image_url;
     private String name;
-    private int runtime;
     private String releaseDate;
-    private String tagline;
-    private String rateDate;
+    private int heartRateAverage;
 
 
 
-    public LibraryItem(String description, int id, String image_url, String name, String releaseDate, int runtime, String tagline, String rateDate) {
+    public LibraryItem(String description, String image_url, String name, String releaseDate, int heartRateAverage) {
         this.description = description;
-        this.id = id;
+//        this.id = id;
         this.image_url = image_url;
         this.name = name;
         this.releaseDate = releaseDate;
-        this.runtime = runtime;
-        this.tagline = tagline;
-        this.rateDate = rateDate;
+        this.heartRateAverage = heartRateAverage;
     }
 
-    public String getRateDate() {
-        return rateDate;
-    }
-
-    public void setRateDate(String rateDate) {
-        this.rateDate = rateDate;
-    }
 
 
     public String getDescription() {
@@ -76,21 +67,14 @@ public class LibraryItem {
         this.releaseDate = releaseDate;
     }
 
-    public int getRuntime() {
-        return runtime;
+    public int getHeartRateAverage(){
+        return heartRateAverage;
     }
 
-    public void setRuntime(int runtime) {
-        this.runtime = runtime;
+    public void setHeartRateAverage(int heartRateAverage){
+        this.heartRateAverage = heartRateAverage;
     }
 
-    public String getTagline() {
-        return tagline;
-    }
-
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-    }
 
 }
 

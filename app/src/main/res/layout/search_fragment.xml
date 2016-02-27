@@ -24,7 +24,17 @@
 
 
 
+
+
     </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="No results for that query"
+        android:id="@+id/noResultsTxt" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

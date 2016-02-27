@@ -1,6 +1,7 @@
 package com.digitalnatives.tabtest.Parse;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.parse.Parse;
 
@@ -12,7 +13,6 @@ public class ParseInit extends Application{
     @Override
     public void onCreate(){
         super.onCreate();
-
 
         Parse.enableLocalDatastore(this);
 

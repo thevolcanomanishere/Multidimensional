@@ -53,6 +53,12 @@
                 android:text="Go to signup page"
                 android:id="@+id/button3" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skip Login"
+                android:id="@+id/skipLoginBtn" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
