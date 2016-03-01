@@ -1,7 +1,9 @@
 package com.digitalnatives.tabtest.adapters;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.media.Image;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import com.digitalnatives.tabtest.MainActivity;
 import com.digitalnatives.tabtest.Movie;
 import com.digitalnatives.tabtest.R;
 import com.digitalnatives.tabtest.Response;
+import com.digitalnatives.tabtest.classes.CustomViewPager;
+import com.digitalnatives.tabtest.fragments.RateFragment;
 import com.digitalnatives.tabtest.interfaces.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -82,10 +86,17 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
 
     @Override
     public void onBindViewHolder(final MovieViewHolder movieViewHolder, int i) {
-        Response.ResultsEntity mi = movies.get(i);
+        final Response.ResultsEntity mi = movies.get(i);
         movieViewHolder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
+//                RateFragment fragment = new RateFragment();
+//                Bundle args = new Bundle();
+//                args.putString("posterUrl", mi.getPoster_path());
+//                fragment.setArguments(args);
+//                fragment.getFragmentManager().beginTransaction().replace(view.getId(), fragment).commit();
+                CustomViewPager pager = new CustomViewPager(mContext);
+
                 MainActivity.mViewPager.setCurrentItem(1);
             }
         });

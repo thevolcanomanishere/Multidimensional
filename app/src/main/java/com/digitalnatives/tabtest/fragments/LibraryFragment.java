@@ -64,7 +64,7 @@ public class LibraryFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 //
-//        libraryList = new ArrayList<>();
+        libraryList = new ArrayList<>();
 //
 //        for (int i = 0; i < 10; i++) {
 //        }
@@ -86,7 +86,6 @@ public class LibraryFragment extends Fragment{
 
         //getContext() needed for Picasso
         rva = new LibraryViewAdapter(libraryList, getContext());
-        Log.d(TAG, libraryList.toString());
         updateLibraryAdapter();
         rv.setAdapter(rva);
         rv.setHasFixedSize(true);

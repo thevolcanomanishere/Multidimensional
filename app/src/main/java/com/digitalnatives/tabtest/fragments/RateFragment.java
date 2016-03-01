@@ -2,6 +2,7 @@ package com.digitalnatives.tabtest.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public class RateFragment extends Fragment{
         private Button startButton;
         private Button pauseButton;
         private TextView timerText;
-        private String tag = "RateFragTip";
+        private String TAG = "RateFragTAG";
 
         private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -51,6 +52,10 @@ public class RateFragment extends Fragment{
             View rootView = inflater.inflate(R.layout.rate_fragment, container, false);
 
 //            final Stopwatch stopwatch = new Stopwatch();
+            Bundle bundle = new Bundle();
+            bundle = getArguments();
+            String posterUrl = bundle.getString("posterUrl");
+            Log.d(TAG, "poster url = " + posterUrl);
 
 
             startButton = (Button) rootView.findViewById(R.id.button4);
