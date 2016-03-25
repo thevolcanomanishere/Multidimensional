@@ -95,7 +95,7 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
 //                args.putString("posterUrl", mi.getPoster_path());
 //                fragment.setArguments(args);
 //                fragment.getFragmentManager().beginTransaction().replace(view.getId(), fragment).commit();
-                CustomViewPager pager = new CustomViewPager(mContext);
+//                CustomViewPager pager = new CustomViewPager(mContext);
 
                 MainActivity.mViewPager.setCurrentItem(1);
             }
