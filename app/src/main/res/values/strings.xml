@@ -24,6 +24,7 @@
     </string>
 
     <!-- SignUp Page -->
+    <string name="usernameSignUpHint">Username</string>
     <string name="emailSignUpTextHint">Email</string>
     <string name="emailConfirmationSignUpTextHint">Email confirmation</string>
     <string name="passwordSignUpTextHint">Password</string>

@@ -16,18 +16,26 @@
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:ems="10"
-            android:id="@+id/editText1"
-            android:hint="@string/emailSignUpTextHint"/>
+            android:id="@+id/userName"
+            android:hint="@string/usernameSignUpHint"/>
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/editText2"
-            android:hint="@string/emailConfirmationSignUpTextHint"/>
+            android:id="@+id/editText1"
+            android:hint="@string/emailSignUpTextHint"/>
+
+        <!--<EditText-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:inputType="textEmailAddress"-->
+            <!--android:ems="10"-->
+            <!--android:id="@+id/editText2"-->
+            <!--android:hint="@string/emailConfirmationSignUpTextHint"/>-->
 
         <EditText
             android:layout_width="fill_parent"
@@ -45,11 +53,17 @@
             android:id="@+id/editText4"
             android:hint="@string/passwordConfirmSignUpTextHint"/>
 
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Sign Up"-->
+            <!--android:id="@+id/button2" />-->
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:id="@+id/button2" />
+            android:text="MONGO Sign Up"
+            android:id="@+id/mongoSignUpBtn" />
 
     </LinearLayout>
 </RelativeLayout>

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.digitalnatives.tabtest.LibraryItem;
 import com.digitalnatives.tabtest.MainActivity;
 import com.digitalnatives.tabtest.R;
+import com.digitalnatives.tabtest.User;
 import com.digitalnatives.tabtest.VolleyController;
 import com.digitalnatives.tabtest.adapters.LibraryViewAdapter;
 import com.parse.FindCallback;
@@ -79,6 +80,10 @@ public class LibraryFragment extends Fragment{
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
 
+        String token = User.getInstance().getToken();
+
+        Toast.makeText(getContext(), "This is the token saved " + token, Toast.LENGTH_LONG).show();
+
         //setup progress dialog
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage("Downloading your library");
@@ -86,7 +91,7 @@ public class LibraryFragment extends Fragment{
 
         //getContext() needed for Picasso
         rva = new LibraryViewAdapter(libraryList, getContext());
-        updateLibraryAdapter();
+//        updateLibraryAdapter();
         rv.setAdapter(rva);
         rv.setHasFixedSize(true);
 
@@ -160,6 +165,17 @@ public class LibraryFragment extends Fragment{
         } else {
             hidepDialog();
             Toast.makeText(getContext(), "No internet connection detected", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void updateLibraryNode(){
+
+        showpDialog();
+        checkConnection();
+        if(isConnected){
+
+
         }
 
     }
