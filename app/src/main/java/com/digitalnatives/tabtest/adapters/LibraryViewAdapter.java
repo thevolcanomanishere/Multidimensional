@@ -66,6 +66,7 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
         }
         @Override
         public void onClick(View view) {
+            clickListener.onClick(view, getAdapterPosition());
            // clickListener.onClick(view, getAdapterPosition());
           //  Toast.makeText(view.getContext(), "Test", Toast.LENGTH_SHORT).show();
             loadLibraryItem = new Intent(view.getContext(), LibraryViewActivity.class);

@@ -11,7 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.android.volley.*;
+import com.android.volley.toolbox.StringRequest;
 import com.digitalnatives.tabtest.activities.LoginActivity;
 import com.digitalnatives.tabtest.classes.CustomViewPager;
 import com.digitalnatives.tabtest.fragments.LibraryFragment;
@@ -19,16 +22,24 @@ import com.digitalnatives.tabtest.fragments.RateFragment;
 import com.digitalnatives.tabtest.fragments.SearchFragment;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     public static CustomViewPager mViewPager;
     public final String BASE_URL = "http://api.themoviedb.org/3/";
-    private ParseUser user;
     private Intent loadLauncher;
 
-    public static String tag = "TabTestLog";
+    public static String TAG = "MainActivity";
 
 
     @Override
@@ -43,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 
-        //Parse Setup
-        ParseUser user = ParseUser.getCurrentUser();
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (CustomViewPager) findViewById(R.id.container);
@@ -84,28 +93,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_logout:
                 loadLauncher = new Intent(this, LoginActivity.class);
-                user.logOut();
-                Log.d(tag, "Current user = " + ParseUser.getCurrentUser());
-
+                logOut();
+                SharedPrefs.clearUserName(this);
+                Toast.makeText(MainActivity.this, "You have been logged out", Toast.LENGTH_SHORT).show();
                 startActivity(loadLauncher);
             case R.id.action_TestParse:
-                Log.d(tag, "Running Test for Parse");
-
-                String description = "This is just a test";
-
-//                ParseObject parseLibraryItem = new ParseObject("ItemTest3");
-//                parseLibraryItem.add("movieId", 121);
-//                parseLibraryItem.add("runtime", 134);
-//                parseLibraryItem.add("status", "not working");
-//                parseLibraryItem.add("name", "TestParseMovie");
-//                parseLibraryItem.add("releaseDate", "2014-11-06");
-//                parseLibraryItem.add("imagePath", "/7k9db7pJyTaVbz3G4eshGltivR1.jpg");
-//                parseLibraryItem.add("description", description);
-//                parseLibraryItem.add("tagline", "The craziest movie ever");
-//                parseLibraryItem.add("createdBy", ParseUser.getCurrentUser());
-//                parseLibraryItem.setACL(new ParseACL(ParseUser.getCurrentUser()));
-//                parseLibraryItem.saveInBackground();
-
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -113,6 +105,50 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    private void logOut(){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiConfig.getBASE_URL() + ApiConfig.getLOGOUT(),
+                new com.android.volley.Response.Listener<String>() {
+                    //
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject responseObject = new JSONObject(response);
+                            Boolean error = responseObject.getBoolean("error");
+                            if(!error){
+
+                            } else {
+                                Toast.makeText(MainActivity.this, responseObject.get("message").toString(), Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new com.android.volley.Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error){
+                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError{
+                Map<String, String> headers = super.getHeaders();
+                if(headers == null || headers.equals(Collections.emptyMap())){
+                    headers = new HashMap<String, String>();
+                }
+                String token = SharedPrefs.getUserToken(MainActivity.this);
+                headers.put("token", token);
+                return headers;
+            }
+        };
+
+        VolleyController.getInstance().addToRequestQueue(stringRequest);
+    }
+
+
 
 
     /**
@@ -164,3 +200,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+

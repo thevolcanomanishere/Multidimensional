@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.digitalnatives.tabtest.R;
+import com.digitalnatives.tabtest.User;
+
+import java.util.ArrayList;
 
 /**
  * Created by alexmcgonagle on 18/11/2015.
@@ -17,8 +20,6 @@ import com.digitalnatives.tabtest.R;
 public class RateFragment extends Fragment{
 
         private Button startButton;
-        private Button pauseButton;
-        private TextView timerText;
         private String TAG = "RateFragTAG";
 
         private static final String ARG_SECTION_NUMBER = "section_number";
@@ -51,10 +52,12 @@ public class RateFragment extends Fragment{
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.rate_fragment, container, false);
 
+            Log.d(TAG, "RATE FRAGMENT FIRING!!!!0");
+
 //            final Stopwatch stopwatch = new Stopwatch();
             Bundle bundle = new Bundle();
             bundle = getArguments();
-            String posterUrl = bundle.getString("posterUrl");
+            String posterUrl = bundle.getString("movieName");
             Log.d(TAG, "poster url = " + posterUrl);
 
 
@@ -63,12 +66,15 @@ public class RateFragment extends Fragment{
             startButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//
-                    if(startButton.getText().equals("Start")) {
-                        startButton.setText("Stop");
-                    } else {
-                        startButton.setText("Start");
-                    }
+                    ArrayList<Integer> ints = new ArrayList<>();
+                    ints.add(1);
+                    ints.add(2);
+                    ints.add(3);
+                    ints.add(4);
+                    ints.add(5);
+                    ints.add(6);
+
+                    User.getInstance().addMovieToUser(getContext(), "TestMovie1", 12345, "A very very long movie", "11-90-12", "/dI2oQoJJ1QxDd5D1UiHfLvkoLnp.jpg", ints);
                 }
             });
 

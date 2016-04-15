@@ -19,8 +19,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.digitalnatives.tabtest.ApiConfig;
 import com.digitalnatives.tabtest.MainActivity;
 import com.digitalnatives.tabtest.R;
+import com.digitalnatives.tabtest.SharedPrefs;
 import com.digitalnatives.tabtest.User;
 import com.digitalnatives.tabtest.VolleyController;
 import com.parse.ParseUser;
@@ -50,7 +52,6 @@ public class signup extends AppCompatActivity {
     private String password;
     private String passwordConf;
 
-    private String url = "https://nodejsandroidserver-thevolcanomanishere-1.c9users.io/register";
 
     private String tag = "SignUpTag";
 
@@ -69,10 +70,6 @@ public class signup extends AppCompatActivity {
 
         loadMainActivity = new Intent(this, MainActivity.class);
 
-
-
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        Log.d(tag, "Current com.digitalnatives.tabtest.User = " + currentUser);
 
         mongoSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +137,7 @@ public class signup extends AppCompatActivity {
 
             if(password.equals(passwordConf)){
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiConfig.getBASE_URL() + ApiConfig.getREGISTER(),
                         new Response.Listener<String>() {
 //
                             @Override
@@ -151,7 +148,7 @@ public class signup extends AppCompatActivity {
                                     Boolean error = responseObject.getBoolean("error");
                                     if(!error){
                                         String token = responseObject.getString("token");
-                                        User.getInstance().setToken(token);
+                                        SharedPrefs.setUserToken(signup.this, token);
 //                                        Toast.makeText(signup.this, token, Toast.LENGTH_SHORT).show();
                                         startActivity(loadMainActivity);
                                     } else {
@@ -165,7 +162,8 @@ public class signup extends AppCompatActivity {
                         }, new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
-                                Toast.makeText(signup.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                                error.getStackTrace();
+                                Toast.makeText(signup.this, "Volley error " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }){
                     @Override

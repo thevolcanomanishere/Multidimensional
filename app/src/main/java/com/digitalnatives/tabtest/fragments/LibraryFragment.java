@@ -15,12 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.digitalnatives.tabtest.ApiConfig;
 import com.digitalnatives.tabtest.LibraryItem;
 import com.digitalnatives.tabtest.MainActivity;
 import com.digitalnatives.tabtest.R;
+import com.digitalnatives.tabtest.SharedPrefs;
 import com.digitalnatives.tabtest.User;
 import com.digitalnatives.tabtest.VolleyController;
 import com.digitalnatives.tabtest.adapters.LibraryViewAdapter;
+import com.google.gson.JsonParseException;
 import com.parse.FindCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -28,11 +36,16 @@ import com.parse.ParseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by alexmcgonagle on 18/11/2015.
@@ -79,11 +92,7 @@ public class LibraryFragment extends Fragment{
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.libRv);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
-
-        String token = User.getInstance().getToken();
-
-        Toast.makeText(getContext(), "This is the token saved " + token, Toast.LENGTH_LONG).show();
-
+        
         //setup progress dialog
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage("Downloading your library");
@@ -91,7 +100,7 @@ public class LibraryFragment extends Fragment{
 
         //getContext() needed for Picasso
         rva = new LibraryViewAdapter(libraryList, getContext());
-//        updateLibraryAdapter();
+        updateLibraryNode();
         rv.setAdapter(rva);
         rv.setHasFixedSize(true);
 
@@ -112,73 +121,103 @@ public class LibraryFragment extends Fragment{
         isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
-    public void updateLibraryAdapter() {
-
-        showpDialog();
-        Log.d(TAG, "isConnected = " + isConnected);
-        checkConnection();
-        if (isConnected) {
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("UserMovieItem");
-            query.whereEqualTo("owner", ParseUser.getCurrentUser().getUsername());
-            query.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(List<ParseObject> objects, com.parse.ParseException e) {
-                    if (e == null) {
-                        Log.d(TAG, "Number of objects = " + objects.size());
-                        //clear library list
-                        libraryList.clear();
-
-                        for (int i = 0; i < objects.size(); i++) {
-                            String objectId = objects.get(i).getString("objectId");
-                            String posterPath = objects.get(i).getString("posterPath");
-                            String releaseDate = objects.get(i).getString("release");
-                            String overview = objects.get(i).getString("overview");
-                            String movieName = objects.get(i).getString("movieName");
-                            JSONArray heartRateArrayJson = objects.get(i).getJSONArray("ratings");
-                            ArrayList<Integer> heartRateList = new ArrayList<>();
-                            for(int z = 0; z < heartRateArrayJson.length(); z++){
-                                try {
-                                    heartRateList.add(heartRateArrayJson.getInt(z));
-                                } catch (JSONException e1) {
-                                    e1.printStackTrace();
-                                }
-                            }
-                            double heartRateAverageDouble = calculateAverage(heartRateList);
-                            int heartRateInt = (int) (heartRateAverageDouble + 0.5);
-
-                            //add this later for more info on each title
-                            //String id = objects.get(i).getString("id");
-
-                            //add each move to the list of movies
-                            libraryList.add(new LibraryItem(overview, posterPath, movieName, releaseDate, heartRateInt));
-                        }
-                        hidepDialog();
-                        rva.notifyDataSetChanged();
-
-                    } else {
-                        hidepDialog();
-                        Log.d("score", "Error: " + e.getMessage());
-                    }
-                }
-            });
-
-        } else {
-            hidepDialog();
-            Toast.makeText(getContext(), "No internet connection detected", Toast.LENGTH_LONG).show();
-        }
-
-    }
 
     private void updateLibraryNode(){
 
         showpDialog();
         checkConnection();
+
         if(isConnected){
 
+            libraryList.clear();
 
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiConfig.getBASE_URL() + ApiConfig.getGET_MOVIES(),
+                    new Response.Listener<String>() {
+                        //
+                        @Override
+                        public void onResponse(String response) {
+
+                            try {
+                                JSONObject responseObject = new JSONObject(response);
+                                Boolean error = responseObject.getBoolean("error");
+                                String test = responseObject.toString();
+                                Log.d("JSOn String : ", test);
+                                if(!error){
+
+                                    //get message array in JSON object
+                                    JSONObject responseTest = new JSONObject(response);
+                                    JSONArray moviesArray = responseTest.getJSONArray("message");
+
+                                    //check array size
+                                    if(moviesArray.length() == 0){
+                                        Toast.makeText(getContext(), "You have no movies saved online", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        //cycle through array and add each element to the libraryAdapter
+                                        for (int i = 0; i < moviesArray.length(); i++) {
+                                            JSONObject childObject = moviesArray.getJSONObject(i);
+                                            String movieName = childObject.getString("movieName");
+                                            int movieId = childObject.getInt("movieId");
+                                            String overview = childObject.getString("overview");
+                                            String releaseDate = childObject.getString("releaseDate");
+                                            String posterPath = childObject.getString("posterPath");
+                                            JSONArray heartRateArray = childObject.getJSONArray("heartRates");
+                                            ArrayList<Integer> heartRateList = new ArrayList<>();
+                                            for (int z = 0; z < heartRateArray.length(); z++) {
+                                                try {
+                                                    heartRateList.add(heartRateArray.getInt(z));
+                                                } catch (JSONException e1) {
+                                                    e1.printStackTrace();
+                                                    hidepDialog();
+                                                }
+                                            }
+
+                                            double heartRateAverageDouble = calculateAverage(heartRateList);
+                                            int heartRateInt = (int) (heartRateAverageDouble + 0.5);
+                                            libraryList.add(new LibraryItem(overview, posterPath, movieName, releaseDate, heartRateInt));
+                                        }
+                                    }
+
+                                    hidepDialog();
+                                    rva.notifyDataSetChanged();
+
+                                } else {
+                                    hidepDialog();
+                                    Toast.makeText(getContext(), responseObject.get("message").toString(), Toast.LENGTH_SHORT).show();
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                hidepDialog();
+                            }
+                        }
+                    }, new Response.ErrorListener(){
+                @Override
+                public void onErrorResponse(VolleyError error){
+                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    hidepDialog();
+                }
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError{
+                    Map<String, String> headers = super.getHeaders();
+                    if(headers == null || headers.equals(Collections.emptyMap())){
+                        headers = new HashMap<String, String>();
+                    }
+                    String token = SharedPrefs.getUserToken(getContext());
+                    headers.put("token", token);
+                    return headers;
+                }
+            };
+
+            VolleyController.getInstance().addToRequestQueue(stringRequest);
+        }
+        else {
+            hidepDialog();
+        Toast.makeText(getContext(), "No internet connection", Toast.LENGTH_SHORT).show();
         }
 
     }
+
 
     //set up progress dialog
     private void showpDialog() {
