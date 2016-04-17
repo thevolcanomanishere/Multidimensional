@@ -58,7 +58,8 @@ public class RateFragment extends Fragment{
             Bundle bundle = new Bundle();
             bundle = getArguments();
             String posterUrl = bundle.getString("movieName");
-            Log.d(TAG, "poster url = " + posterUrl);
+//            Log.d(TAG, "Moviename ="  + posterUrl);
+            Log.d(TAG, "This is the RATE frag");
 
 
             startButton = (Button) rootView.findViewById(R.id.button4);

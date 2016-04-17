@@ -5,9 +5,10 @@ package com.digitalnatives.tabtest;
  */
 public class ApiConfig {
 
+
     public static String BASE_URL = "https://pacific-escarpment-20911.herokuapp.com/";
-    public static String LOGIN = "login";
-    public static String REGISTER = "register";
+    public static String LOGIN = BASE_URL + "login";
+    public static String REGISTER = BASE_URL + "register";
     public static String GET_MOVIES = "user/movieswatched";
     public static String ADD_MOVIES = "user/movieswatched";
     public static String LOGOUT = "logout";

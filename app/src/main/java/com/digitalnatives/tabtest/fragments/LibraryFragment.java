@@ -22,28 +22,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.digitalnatives.tabtest.ApiConfig;
 import com.digitalnatives.tabtest.LibraryItem;
-import com.digitalnatives.tabtest.MainActivity;
+
 import com.digitalnatives.tabtest.R;
 import com.digitalnatives.tabtest.SharedPrefs;
-import com.digitalnatives.tabtest.User;
+
 import com.digitalnatives.tabtest.VolleyController;
 import com.digitalnatives.tabtest.adapters.LibraryViewAdapter;
-import com.google.gson.JsonParseException;
-import com.parse.FindCallback;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+
 import java.util.HashMap;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
 
@@ -92,6 +87,8 @@ public class LibraryFragment extends Fragment{
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.libRv);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
+
+        Log.d(TAG, "This is the lib frag");
         
         //setup progress dialog
         pDialog = new ProgressDialog(getContext());
@@ -140,8 +137,7 @@ public class LibraryFragment extends Fragment{
                             try {
                                 JSONObject responseObject = new JSONObject(response);
                                 Boolean error = responseObject.getBoolean("error");
-                                String test = responseObject.toString();
-                                Log.d("JSOn String : ", test);
+                               
                                 if(!error){
 
                                     //get message array in JSON object

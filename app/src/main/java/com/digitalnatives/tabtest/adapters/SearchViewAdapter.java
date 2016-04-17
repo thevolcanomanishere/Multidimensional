@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.digitalnatives.tabtest.MainActivity;
 import com.digitalnatives.tabtest.R;
 import com.digitalnatives.tabtest.Response;
+import com.digitalnatives.tabtest.fragments.RateFragment;
 import com.digitalnatives.tabtest.interfaces.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -86,10 +87,10 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
         movieViewHolder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putString("movieName", mi.getOriginal_title());
-                intent.putExtras(bundle);
+                RateFragment rateFragment = new RateFragment();
+                rateFragment.setArguments(bundle);
                 MainActivity.mViewPager.setCurrentItem(1);
             }
         });

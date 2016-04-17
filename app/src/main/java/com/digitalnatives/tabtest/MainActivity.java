@@ -97,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 SharedPrefs.clearUserName(this);
                 Toast.makeText(MainActivity.this, "You have been logged out", Toast.LENGTH_SHORT).show();
                 startActivity(loadLauncher);
-            case R.id.action_TestParse:
-
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -157,14 +155,13 @@ public class MainActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter(FragmentManager fm)  {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
+
             if(position == 0) {
                 return LibraryFragment.newInstance(position + 1);
             }
