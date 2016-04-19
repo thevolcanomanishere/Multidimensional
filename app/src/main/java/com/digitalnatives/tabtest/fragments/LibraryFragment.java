@@ -26,6 +26,7 @@ import com.digitalnatives.tabtest.LibraryItem;
 import com.digitalnatives.tabtest.R;
 import com.digitalnatives.tabtest.SharedPrefs;
 
+import com.digitalnatives.tabtest.User;
 import com.digitalnatives.tabtest.VolleyController;
 import com.digitalnatives.tabtest.adapters.LibraryViewAdapter;
 
@@ -48,7 +49,6 @@ import java.util.Map;
 public class LibraryFragment extends Fragment{
 
     private List<LibraryItem> libraryList;
-    private Context context;
     private static final String ARG_SECTION_NUMBER = "section_number";
     private String TAG = "LibFragmentTag";
     private LibraryViewAdapter rva;
@@ -56,6 +56,13 @@ public class LibraryFragment extends Fragment{
     private NetworkInfo activeNetwork;
     private boolean isConnected;
     private ProgressDialog pDialog;
+
+    //used to stop library updating on every page tab
+    private static boolean firstLoad = true;
+
+    public static void setFirstLoad(boolean firstLoad) {
+        LibraryFragment.firstLoad = firstLoad;
+    }
 
 
     public static LibraryFragment newInstance(int sectionNumber) {
@@ -86,18 +93,25 @@ public class LibraryFragment extends Fragment{
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.libRv);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        llm.setReverseLayout(true);
         rv.setLayoutManager(llm);
 
-        Log.d(TAG, "This is the lib frag");
+
         
         //setup progress dialog
         pDialog = new ProgressDialog(getContext());
-        pDialog.setMessage("Downloading your library");
-        pDialog.setCancelable(false);
+
 
         //getContext() needed for Picasso
         rva = new LibraryViewAdapter(libraryList, getContext());
-        updateLibraryNode();
+
+        //check if info is already downloaded
+        if(firstLoad){
+            updateLibraryNode();
+        } else {
+            libraryList.addAll(User.getInstance().getLibraryItemList());
+        }
+
         rv.setAdapter(rva);
         rv.setHasFixedSize(true);
 
@@ -123,6 +137,8 @@ public class LibraryFragment extends Fragment{
 
         showpDialog();
         checkConnection();
+        pDialog.setMessage("Downloading your library");
+        pDialog.setCancelable(false);
 
         if(isConnected){
 
@@ -137,7 +153,7 @@ public class LibraryFragment extends Fragment{
                             try {
                                 JSONObject responseObject = new JSONObject(response);
                                 Boolean error = responseObject.getBoolean("error");
-                               
+
                                 if(!error){
 
                                     //get message array in JSON object
@@ -157,6 +173,7 @@ public class LibraryFragment extends Fragment{
                                             String releaseDate = childObject.getString("releaseDate");
                                             String posterPath = childObject.getString("posterPath");
                                             JSONArray heartRateArray = childObject.getJSONArray("heartRates");
+
                                             ArrayList<Integer> heartRateList = new ArrayList<>();
                                             for (int z = 0; z < heartRateArray.length(); z++) {
                                                 try {
@@ -169,12 +186,19 @@ public class LibraryFragment extends Fragment{
 
                                             double heartRateAverageDouble = calculateAverage(heartRateList);
                                             int heartRateInt = (int) (heartRateAverageDouble + 0.5);
-                                            libraryList.add(new LibraryItem(overview, posterPath, movieName, releaseDate, heartRateInt));
+
+                                            libraryList.add(new LibraryItem(overview, movieId,
+                                                    posterPath,
+                                                    movieName,
+                                                    releaseDate,
+                                                    heartRateInt,
+                                                    heartRateList));
                                         }
                                     }
-
+                                    User.getInstance().setLibraryItemList(libraryList);
                                     hidepDialog();
                                     rva.notifyDataSetChanged();
+                                    firstLoad = false;
 
                                 } else {
                                     hidepDialog();

@@ -136,7 +136,6 @@ public class SearchFragment extends Fragment {
         noResultsTxt.setVisibility(View.GONE);
         showpDialog();
         String query = searchTextEdit.getText().toString();
-        Log.d(TAG, "Query =" + query);
         String url = baseUrl + key + "&query=" + query;
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {

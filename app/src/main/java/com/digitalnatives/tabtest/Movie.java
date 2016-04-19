@@ -7,15 +7,89 @@ import java.util.List;
  */
 public class Movie {
 
-    public int id;
-    public int runtime;
-    public String status;
-    public String name;
-    public String releaseDate;
-    public String imagePath;
-    public String description;
-    public String tagline;
+    public static int id;
+    public static int runtime;
+    public static String status;
+    public static String name;
+    public static String releaseDate;
+    public static String imagePath;
+    public static String description;
+    public static String tagline;
     public List<Movie> movies;
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        Movie.id = id;
+    }
+
+    public static int getRuntime() {
+        return runtime;
+    }
+
+    public static void setRuntime(int runtime) {
+        Movie.runtime = runtime;
+    }
+
+    public static String getStatus() {
+        return status;
+    }
+
+    public static void setStatus(String status) {
+        Movie.status = status;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        Movie.name = name;
+    }
+
+    public static String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public static void setReleaseDate(String releaseDate) {
+        Movie.releaseDate = releaseDate;
+    }
+
+    public static String getImagePath() {
+        return imagePath;
+    }
+
+    public static void setImagePath(String imagePath) {
+        Movie.imagePath = imagePath;
+    }
+
+    public static String getDescription() {
+        return description;
+    }
+
+    public static void setDescription(String description) {
+        Movie.description = description;
+    }
+
+    public static String getTagline() {
+        return tagline;
+    }
+
+    public static void setTagline(String tagline) {
+        Movie.tagline = tagline;
+    }
+
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
+
 
 
     public Movie(String description, int id, String imagePath, String name, int runtime, String releaseDate, String status, String tagline) {
@@ -29,70 +103,6 @@ public class Movie {
         this.tagline = tagline;
     }
 
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public int getRuntime() {
-        return runtime;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getTagline() {
-        return tagline;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public void setRuntime(int runtime) {
-        this.runtime = runtime;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
 
 

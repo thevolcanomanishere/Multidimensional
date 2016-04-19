@@ -33,6 +33,7 @@
     <!-- Rate Page -->
     <string name="timerButtonStart">Start</string>
     <string name="timerButtonStop">Stop</string>
+    <string name="saveButton">Save</string>
     <string name="tablibrary">Library</string>
     <string name="tabRate">Rate</string>
     <string name="tabSearch">Search</string>

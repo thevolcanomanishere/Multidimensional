@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,12 +26,19 @@ public class User extends VolleyController {
 
     private static User mUser = new User();
     private String token;
-//    private Context context;
-//
-//    public User(Context context){
-//        this.context = context;
-//    }
-//
+    private static List<LibraryItem> libraryItemList;
+
+
+    public List<LibraryItem> getLibraryItemList() {
+        return libraryItemList;
+    }
+
+    public void setLibraryItemList(List<LibraryItem> libraryItemList) {
+        this.libraryItemList = libraryItemList;
+    }
+
+
+
 
     public static synchronized User getInstance() {
         return mUser;

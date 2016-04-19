@@ -15,6 +15,9 @@ public class CustomViewPager extends android.support.v4.view.ViewPager {
         this.enabled = true;
     }
 
+
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return enabled ? super.onTouchEvent(event) : false;

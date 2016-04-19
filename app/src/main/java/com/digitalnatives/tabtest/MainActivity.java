@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,7 +35,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private static SectionsPagerAdapter mSectionsPagerAdapter;
     public static CustomViewPager mViewPager;
     public final String BASE_URL = "http://api.themoviedb.org/3/";
     private Intent loadLauncher;
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm)  {
             super(fm);
@@ -166,10 +167,10 @@ public class MainActivity extends AppCompatActivity {
                 return LibraryFragment.newInstance(position + 1);
             }
             else if (position == 1){
-                return RateFragment.newInstance(position + 1);
+                return SearchFragment.newInstance(position + 1);
             }
             else{
-                return SearchFragment.newInstance(position + 1);
+                return RateFragment.newInstance(position + 1);
             }
         }
 
@@ -185,9 +186,9 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return getString(R.string.tablibrary);
                 case 1:
-                    return getString(R.string.tabRate);
-                case 2:
                     return getString(R.string.tabSearch);
+                case 2:
+                    return getString(R.string.tabRate);
             }
             return null;
         }

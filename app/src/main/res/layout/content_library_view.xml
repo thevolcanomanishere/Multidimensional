@@ -24,20 +24,35 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/libraryViewPoster"
                 android:layout_weight="1"
                 android:src="@drawable/monsters"
                 android:nestedScrollingEnabled="false" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Monsters Inc"
-                android:id="@+id/textView"
-                android:layout_weight="1" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Monsters Inc"
+                    android:id="@+id/libViewMovieName" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/textView" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -46,10 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView3" />
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

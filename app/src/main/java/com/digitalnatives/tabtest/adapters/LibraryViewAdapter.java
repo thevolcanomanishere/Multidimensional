@@ -2,6 +2,7 @@ package com.digitalnatives.tabtest.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.digitalnatives.tabtest.LibraryItem;
 import com.digitalnatives.tabtest.R;
@@ -67,11 +69,6 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
         @Override
         public void onClick(View view) {
             clickListener.onClick(view, getAdapterPosition());
-           // clickListener.onClick(view, getAdapterPosition());
-          //  Toast.makeText(view.getContext(), "Test", Toast.LENGTH_SHORT).show();
-            loadLibraryItem = new Intent(view.getContext(), LibraryViewActivity.class);
-//            loadLibraryItem.putExtra("MovieId", )
-            view.getContext().startActivity(loadLibraryItem);
         }
 
     }
@@ -85,7 +82,22 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
 
     @Override
     public void onBindViewHolder(LibraryViewHolder libraryViewHolder, int i){
-        LibraryItem mi = movies.get(i);
+        final LibraryItem mi = movies.get(i);
+        libraryViewHolder.setClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putString("movieName", mi.getName());
+                bundle.putInt("id", mi.getId());
+                bundle.putString("description", mi.getDescription());
+                bundle.putString("releaseDate", mi.getReleaseDate());
+                bundle.putString("posterPath", mi.getImage_url());
+                bundle.putIntegerArrayList("heartRates", mi.getHeartRates());
+                Intent loadLibraryViewActivity = new Intent(mContext, LibraryViewActivity.class);
+                loadLibraryViewActivity.putExtras(bundle);
+                mContext.startActivity(loadLibraryViewActivity);
+            }
+        });
         libraryViewHolder.movieName.setText(mi.getName());
         libraryViewHolder.releaseDate.setText(mi.getReleaseDate());
 

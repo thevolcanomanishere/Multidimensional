@@ -1,19 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/RateFragLinear"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="horizontal"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="355dp"
         android:layout_gravity="center_horizontal">
 
-        <ImageView android:layout_width="120dp" android:layout_height="270dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/imageView"
-            android:layout_weight="1"
-            android:src="@drawable/monsters"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="168dp">
+
+            <ImageView android:layout_width="120dp" android:layout_height="393dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/imageView"
+                android:src="@drawable/monsters"
+                android:layout_weight="0.31" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="IMDb: "
+                    android:id="@+id/imdb" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=""
+                    android:id="@+id/imdbText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Runtime"
+                    android:id="@+id/runtime" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text=""
+                    android:id="@+id/runtimeText" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
@@ -41,6 +91,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Description text"
                 android:id="@+id/description"
+                android:textSize="7pt"
                 android:layout_weight="1.00" />
 
         </LinearLayout>
@@ -56,19 +107,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/timerButtonStart"
-            android:id="@+id/button4"
+            android:id="@+id/startButton"
             android:layout_gravity="center_horizontal" />
 
-        <SeekBar
-            android:id="@+id/seekBar1"
-            android:layout_width="fill_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="26dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:max="10"/>
+            android:text="@string/saveButton"
+            android:id="@+id/saveButton"
+            android:layout_gravity="center_horizontal" />
 
 
     </LinearLayout>

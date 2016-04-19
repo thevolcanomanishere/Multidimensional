@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitalnatives.tabtest.MainActivity;
+import com.digitalnatives.tabtest.Movie;
 import com.digitalnatives.tabtest.R;
 import com.digitalnatives.tabtest.Response;
 import com.digitalnatives.tabtest.fragments.RateFragment;
@@ -87,11 +90,20 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
         movieViewHolder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("movieName", mi.getOriginal_title());
-                RateFragment rateFragment = new RateFragment();
-                rateFragment.setArguments(bundle);
-                MainActivity.mViewPager.setCurrentItem(1);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("movieName", mi.getOriginal_title());
+//                RateFragment rateFragment = new RateFragment();
+//                rateFragment.setArguments(bundle);
+                Movie.setName(mi.getOriginal_title());
+                Movie.setReleaseDate(mi.getRelease_date());
+                Movie.setDescription(mi.getOverview());
+                Movie.setImagePath(mi.getPoster_path());
+
+
+                RateFragment.setHasLoaded(true);
+                RateFragment.refreshFragment();
+                MainActivity.mViewPager.setCurrentItem(0);
+                MainActivity.mViewPager.setCurrentItem(2);
             }
         });
         movieViewHolder.movieName.setText(mi.getOriginal_title());
