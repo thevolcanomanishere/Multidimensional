@@ -6,10 +6,12 @@ package com.digitalnatives.tabtest;
 public class ApiConfig {
 
 
-    //server api
+    private static boolean devMode = true;
+
     public static String BASE_URL = "https://pacific-escarpment-20911.herokuapp.com/";
-    public static String LOGIN = BASE_URL + "login";
-    public static String REGISTER = BASE_URL + "register";
+    public static String DEV_URL = "https://nodejsandroidserver-thevolcanomanishere.c9users.io/";
+    public static String LOGIN = "login";
+    public static String REGISTER = "register";
     public static String GET_MOVIES = "user/movieswatched";
     public static String ADD_MOVIES = "user/movieswatched";
     public static String LOGOUT = "logout";
@@ -40,19 +42,42 @@ public class ApiConfig {
 
 
     public static String getLOGIN() {
-        return LOGIN;
+        if(devMode){
+            String DevModeUrl = DEV_URL + LOGIN;
+            return DevModeUrl;
+        } else {
+            String URL = BASE_URL + LOGIN;
+            return LOGIN;
+        }
     }
 
     public static String getREGISTER() {
-        return REGISTER;
+        if(devMode){
+            String DevModeUrl = DEV_URL + REGISTER;
+            return DevModeUrl;
+        } else{
+            return REGISTER;
+        }
     }
 
     public static String getGET_MOVIES() {
-        return GET_MOVIES;
+        if(devMode){
+            String DevMode = DEV_URL + GET_MOVIES;
+            return DevMode;
+        } else {
+            String ProdMode = BASE_URL + GET_MOVIES;
+            return ProdMode;
+        }
     }
 
     public static String getADD_MOVIES() {
-        return ADD_MOVIES;
+        if(devMode){
+            String DevMode = DEV_URL + ADD_MOVIES;
+            return DevMode;
+        } else {
+            String ProdMode = BASE_URL + ADD_MOVIES;
+            return ProdMode;
+        }
     }
 
     public static String getLOGOUT() {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,7 +45,9 @@ public class signup extends AppCompatActivity {
     private Button signUpBtn;
     private Button mongoSignUp;
     private Intent loadMainActivity;
+    private Intent loadLogin;
     private ProgressBar progressBar;
+    private TextView linkLogin;
 
     private String username;
     private String email;
@@ -64,9 +67,10 @@ public class signup extends AppCompatActivity {
 
         usernameEditText = (EditText) findViewById(R.id.userName);
         emailEditText = (EditText) findViewById(R.id.editText1);
-        passwordEditText = (EditText) findViewById(R.id.editText3);
-        passwordConfEditText = (EditText) findViewById(R.id.editText4);
+        passwordEditText = (EditText) findViewById(R.id.editText4);
+        passwordConfEditText = (EditText) findViewById(R.id.passwordConf);
         mongoSignUp = (Button) findViewById(R.id.mongoSignUpBtn);
+        linkLogin = (TextView) findViewById(R.id.link_login);
 
         loadMainActivity = new Intent(this, MainActivity.class);
 
@@ -76,6 +80,15 @@ public class signup extends AppCompatActivity {
             public void onClick(View v) {
 
                 signUpUser();
+            }
+        });
+
+        linkLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(loadLogin);
+                Log.d("THIS", "Firing");
             }
         });
 
@@ -135,9 +148,11 @@ public class signup extends AppCompatActivity {
             password = passwordEditText.getText().toString().trim();
             passwordConf = passwordConfEditText.getText().toString().trim();
 
+            Log.d("PARAMS", "= " + username + " " + email + " " + password);
+
             if(password.equals(passwordConf)){
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiConfig.getBASE_URL() + ApiConfig.getREGISTER(),
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiConfig.getREGISTER(),
                         new Response.Listener<String>() {
 //
                             @Override
@@ -164,6 +179,7 @@ public class signup extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error){
                                 error.getStackTrace();
                                 Toast.makeText(signup.this, "Volley error " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
                     }
                 }){
                     @Override
@@ -177,6 +193,8 @@ public class signup extends AppCompatActivity {
                 };
 
                 VolleyController.getInstance().addToRequestQueue(stringRequest);
+            } else {
+                Toast.makeText(signup.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
             }
 
         } else {

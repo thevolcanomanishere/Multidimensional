@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity{
     private String username;
     private String password;
 
-    private Button signUpLoad;
+    private TextView signUpLoad;
     private Button signInButton;
     private Button skipLoginBtn;
 
@@ -76,19 +77,19 @@ public class LoginActivity extends AppCompatActivity{
         mPasswordView = (EditText) findViewById(R.id.password);
         signInButton = (Button)findViewById(R.id.signin);
 
-        //TODO:remove in final
-        skipLoginBtn = (Button) findViewById(R.id.skipLoginBtn);
-        skipLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String testUsername = "test1234";
-                String testPassword = "hellothere";
-                loginWithMongo(testUsername, testPassword);
-            }
-        });
+//        //TODO:remove in final
+//        skipLoginBtn = (Button) findViewById(R.id.skipLoginBtn);
+//        skipLoginBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String testUsername = "test1234";
+//                String testPassword = "hellothere";
+//                loginWithMongo(testUsername, testPassword);
+//            }
+//        });
 
 
-        signUpLoad = (Button) findViewById(R.id.button3);
+        signUpLoad = (TextView) findViewById(R.id.signUp);
         signUpIntent = new Intent(this, signup.class);
 
         signUpLoad.setOnClickListener(new View.OnClickListener() {

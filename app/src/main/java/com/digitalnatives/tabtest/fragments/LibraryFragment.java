@@ -93,7 +93,7 @@ public class LibraryFragment extends Fragment{
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.libRv);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setReverseLayout(true);
+//        llm.setReverseLayout(true);
         rv.setLayoutManager(llm);
 
 
@@ -144,7 +144,8 @@ public class LibraryFragment extends Fragment{
 
             libraryList.clear();
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiConfig.getBASE_URL() + ApiConfig.getGET_MOVIES(),
+            StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                    ApiConfig.getGET_MOVIES(),
                     new Response.Listener<String>() {
                         //
                         @Override

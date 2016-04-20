@@ -16,8 +16,11 @@
             android:layout_weight="1" />
 
         <Button
+            android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/roundedcorner"
+            android:textColor="#ffffff"
             android:text="@string/searchText"
             android:id="@+id/button" />
 

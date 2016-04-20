@@ -113,7 +113,8 @@ public class User extends VolleyController {
             e.printStackTrace();
         }
 
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST, ApiConfig.getBASE_URL() + ApiConfig.getADD_MOVIES(), js,
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,
+                ApiConfig.getADD_MOVIES(), js,
                     new com.android.volley.Response.Listener<JSONObject>() {
                     //
                     @Override
@@ -138,7 +139,8 @@ public class User extends VolleyController {
                 }, new com.android.volley.Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error){
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Error thrown here");
             }
         }){
             @Override
