@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digitalnatives.tabtest.LibraryItem;
+import com.digitalnatives.tabtest.Models.MovieIdResponse;
 import com.digitalnatives.tabtest.R;
+import com.digitalnatives.tabtest.User;
 import com.digitalnatives.tabtest.activities.LibraryViewActivity;
 import com.digitalnatives.tabtest.interfaces.ItemClickListener;
 import com.squareup.picasso.Picasso;
@@ -94,7 +96,16 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
                 bundle.putString("posterPath", mi.getImage_url());
                 bundle.putIntegerArrayList("heartRates", mi.getHeartRates());
                 Intent loadLibraryViewActivity = new Intent(mContext, LibraryViewActivity.class);
+//                User.getInstance().getMoreInfoOnMovie(mContext, mi.getId());
                 loadLibraryViewActivity.putExtras(bundle);
+//                MovieIdResponse movieResponse = User.getInstance().getMovie();
+//                String budget = movieResponse.getBudget().toString();
+//                String runtime = movieResponse.getRuntime().toString();
+//                String revenue = movieResponse.getRevenue().toString();
+//                bundle.putString("budget", budget);
+//                bundle.putString("runtime", runtime);
+//                bundle.putString("revenue", revenue);
+//                loadLibraryViewActivity.putExtras(bundle);
                 mContext.startActivity(loadLibraryViewActivity);
             }
         });

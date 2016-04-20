@@ -6,8 +6,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.*;
+import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.digitalnatives.tabtest.Models.MovieIdResponse;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +31,16 @@ public class User extends VolleyController {
     private static User mUser = new User();
     private String token;
     private static List<LibraryItem> libraryItemList;
+
+    public MovieIdResponse getMovie() {
+        return movie;
+    }
+
+    public void setMovie(MovieIdResponse movie) {
+        this.movie = movie;
+    }
+
+    private MovieIdResponse movie;
 
 
     public List<LibraryItem> getLibraryItemList() {
@@ -50,6 +64,35 @@ public class User extends VolleyController {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public void getMoreInfoOnMovie(final Context context, int id){
+
+
+
+        String url = ApiConfig.getBaseTmdbInfoUrl() + "/" + id + ApiConfig.getTmdbKey();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET, url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        String string = response.toString();
+                        Toast.makeText(context, string, Toast.LENGTH_SHORT).show();
+                        //TODO: Handle Error here
+                        Gson gson = new Gson();
+                        String responseString = response.toString();
+                        movie = gson.fromJson(responseString, MovieIdResponse.class);
+                        User.getInstance().setMovie(movie);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        VolleyController.getInstance().addToRequestQueue(jsonObjReq);
     }
 
     public void addMovieToUser(final Context context, final String movieName, final int movieId, final String overview,

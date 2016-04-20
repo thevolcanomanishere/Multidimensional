@@ -33,6 +33,9 @@ public class ApiConfig {
     //tmdb api
     private static String BASE_TMDB_IMAGE_URL
             = "http://image.tmdb.org/t/p/w185";
+
+
+    private static String BASE_TMDB_INFO_URL = "http://api.themoviedb.org/3/search/movie";
     private static String TMDB_KEY = "?api_key=72508de530eba41fb571b4a5b10dd99b";
 
 
@@ -60,6 +63,15 @@ public class ApiConfig {
     public static String getBASE_URL() {
         return BASE_URL;
     }
+
+    public static String getBaseTmdbInfoUrl() {
+        return BASE_TMDB_INFO_URL;
+    }
+
+    public static void setBaseTmdbInfoUrl(String baseTmdbInfoUrl) {
+        BASE_TMDB_INFO_URL = baseTmdbInfoUrl;
+    }
+
 
 
 }

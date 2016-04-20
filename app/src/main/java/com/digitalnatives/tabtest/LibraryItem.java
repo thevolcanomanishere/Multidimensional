@@ -20,11 +20,11 @@ public class LibraryItem {
 
 
 
-    public LibraryItem(String description, int id, String image_url, String name, String releaseDate,
+    public LibraryItem(String description, String image_url, String name, String releaseDate,
                        int heartRateAverage,
                        ArrayList<Integer> heartRates) {
         this.description = description;
-        this.id = id;
+
         this.image_url = image_url;
         this.name = name;
         this.releaseDate = releaseDate;
