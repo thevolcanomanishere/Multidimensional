@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +31,20 @@ public class LibraryViewActivity extends AppCompatActivity {
 
         ImageView poster = (ImageView) findViewById(R.id.libraryViewPoster);
         TextView movieNameText = (TextView) findViewById(R.id.libViewMovieName);
+        Button loadChartBtn = (Button) findViewById(R.id.loadChartBtn);
 
+        final ArrayList<Integer> heartRates = new ArrayList<>();
+
+        loadChartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ChartView.class);
+                Bundle bundle = new Bundle();
+//                bundle.putIntegerArrayList("hearRates", heartRates);
+//                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
 
 

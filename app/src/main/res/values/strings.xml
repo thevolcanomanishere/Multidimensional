@@ -38,4 +38,8 @@
     <string name="tabRate">Rate</string>
     <string name="tabSearch">Search</string>
     <string name="title_activity_library_view">LibraryViewActivity</string>
+
+    <string name="title_activity_chart_view">ChartView</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
