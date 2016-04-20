@@ -179,6 +179,7 @@ public class LibraryFragment extends Fragment{
                                             ArrayList<Integer> heartRateList = new ArrayList<>();
                                             for (int z = 0; z < heartRateArray.length(); z++) {
                                                 try {
+                                                    Log.d(TAG, "Number = " + heartRateArray.getInt(z));
                                                     heartRateList.add(heartRateArray.getInt(z));
                                                 } catch (JSONException e1) {
                                                     e1.printStackTrace();

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.*;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.digitalnatives.tabtest.activities.LoginActivity;
 import com.digitalnatives.tabtest.classes.CustomViewPager;
@@ -96,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
                 loadLauncher = new Intent(this, LoginActivity.class);
                 logOut();
                 SharedPrefs.clearUserName(this);
-                Toast.makeText(MainActivity.this, "You have been logged out", Toast.LENGTH_SHORT).show();
+                LibraryFragment.setFirstLoad(true);
+                RateFragment.setHasLoaded(false);
                 startActivity(loadLauncher);
             default:
                 return super.onOptionsItemSelected(item);
@@ -107,19 +109,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void logOut(){
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiConfig.getBASE_URL() + ApiConfig.getLOGOUT(),
-                new com.android.volley.Response.Listener<String>() {
+        Log.d(TAG, ApiConfig.getLOGOUT());
+        Log.d(TAG, SharedPrefs.getUserToken(getApplicationContext()));
+        final String token = SharedPrefs.getUserToken(getApplicationContext());
+
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, ApiConfig.getLOGOUT(),
+                new com.android.volley.Response.Listener<JSONObject>() {
                     //
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
 
                         try {
-                            JSONObject responseObject = new JSONObject(response);
-                            Boolean error = responseObject.getBoolean("error");
+
+                            Boolean error = response.getBoolean("error");
                             if(!error){
+                                Toast.makeText(MainActivity.this, "You have been logged out", Toast.LENGTH_SHORT).show();
+
 
                             } else {
-                                Toast.makeText(MainActivity.this, responseObject.get("message").toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -129,7 +137,9 @@ public class MainActivity extends AppCompatActivity {
                 }, new com.android.volley.Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error){
-                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+                error.getCause();
+                Toast.makeText(MainActivity.this, "Volley Error", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -138,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 if(headers == null || headers.equals(Collections.emptyMap())){
                     headers = new HashMap<String, String>();
                 }
-                String token = SharedPrefs.getUserToken(MainActivity.this);
+                Log.d(TAG, "getHeaders " + token);
                 headers.put("token", token);
                 return headers;
             }

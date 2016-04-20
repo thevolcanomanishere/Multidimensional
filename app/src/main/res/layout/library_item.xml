@@ -29,7 +29,8 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/poster"
             android:text="Title"
-            android:textSize="15sp" />
+            android:textColor="#000000"
+            android:textSize="21sp" />
 
         <TextView
             android:id="@+id/releaseDate"

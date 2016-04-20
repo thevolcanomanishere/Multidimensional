@@ -47,7 +47,7 @@ public class ApiConfig {
             return DevModeUrl;
         } else {
             String URL = BASE_URL + LOGIN;
-            return LOGIN;
+            return URL;
         }
     }
 
@@ -56,7 +56,8 @@ public class ApiConfig {
             String DevModeUrl = DEV_URL + REGISTER;
             return DevModeUrl;
         } else{
-            return REGISTER;
+            String ProdMode = BASE_URL + REGISTER;
+            return ProdMode;
         }
     }
 
@@ -81,7 +82,13 @@ public class ApiConfig {
     }
 
     public static String getLOGOUT() {
-        return LOGOUT;
+        if(devMode){
+            String DevModeUrl = DEV_URL + LOGOUT;
+            return DevModeUrl;
+        } else {
+            String URL = BASE_URL + LOGOUT;
+            return URL;
+        }
     }
 
 

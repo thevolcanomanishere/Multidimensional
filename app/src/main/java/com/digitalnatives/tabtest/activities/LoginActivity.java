@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity{
 
             if(password.length() > 4){
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiConfig.getBASE_URL() + ApiConfig.getLOGIN(),
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiConfig.getLOGIN(),
                         new Response.Listener<String>() {
                             //
                             @Override
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity{
                                         SharedPrefs.setUserToken(LoginActivity.this, token);
                                         startActivity(mainActivityIntent);
                                     } else {
-                                        Toast.makeText(LoginActivity.this, responseObject.get("message").toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, responseObject.toString(), Toast.LENGTH_SHORT).show();
                                     }
 
                                 } catch (JSONException e) {

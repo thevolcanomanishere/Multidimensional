@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +96,7 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
                 bundle.putString("releaseDate", mi.getReleaseDate());
                 bundle.putString("posterPath", mi.getImage_url());
                 bundle.putIntegerArrayList("heartRates", mi.getHeartRates());
+                Log.d("Adapter", "Heart rates = " + mi.getHeartRates().size());
                 Intent loadLibraryViewActivity = new Intent(mContext, LibraryViewActivity.class);
 //                User.getInstance().getMoreInfoOnMovie(mContext, mi.getId());
                 loadLibraryViewActivity.putExtras(bundle);
