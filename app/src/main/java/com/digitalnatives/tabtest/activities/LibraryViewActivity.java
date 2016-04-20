@@ -32,21 +32,6 @@ public class LibraryViewActivity extends AppCompatActivity {
 
 
 
-//        Intent intent = getIntent();
-//        String movieName = intent.getStringExtra("movieName");
-//        String description = intent.getStringExtra("description");
-//        String releaseDate = intent.getStringExtra("releaseDate");
-//        String posterPath = intent.getStringExtra("posterPath");
-//        String budget = intent.getStringExtra("budget");
-//        String runtime = intent.getStringExtra("runtime");
-////        String revenue = intent.getStringExtra("revenue");
-//        MovieIdResponse response = User.getInstance().getMovie();
-//        String runtime = response.getRuntime().toString();
-//
-////        ArrayList<Integer> heartRates = intent.getIntegerArrayListExtra("heartRates");
-////        Toast.makeText(LibraryViewActivity.this, movieName, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(LibraryViewActivity.this, runtime, Toast.LENGTH_SHORT).show();
-
 
 
 

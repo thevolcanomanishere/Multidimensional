@@ -82,7 +82,15 @@ public class RateFragment extends Fragment{
             rootView = inflater.inflate(R.layout.rate_fragment, container, false);
 
             if(!HasLoaded){
-                rootView.findViewById(R.id.RateFragLinear).setVisibility(View.GONE);
+//                rootView.findViewById(R.id.RateFragLinear).setVisibility(View.GONE);
+                rootView.findViewById(R.id.linear1).setVisibility(View.GONE);
+                rootView.findViewById(R.id.linear2).setVisibility(View.GONE);
+
+
+            } else {
+                rootView.findViewById(R.id.linear1).setVisibility(View.VISIBLE);
+                rootView.findViewById(R.id.linear2).setVisibility(View.VISIBLE);
+                rootView.findViewById(R.id.warning).setVisibility(View.GONE);
             }
             if(Movie.getName() != null) {
                 TextView movieTitle = (TextView) rootView.findViewById(R.id.movieTitle);
@@ -124,9 +132,21 @@ public class RateFragment extends Fragment{
                     Log.d(TAG, "Time diff = " + diffSeconds);
 
                     ArrayList<Integer> heartRates = new ArrayList<Integer>();
-                    heartRates.add(1);
-                    heartRates.add(2);
-                    heartRates.add(3);
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
+                    heartRates.add(makeRandomNum(65, 120));
 
                     User.getInstance().addMovieToUser(getContext(),
                             Movie.getName(),
@@ -135,6 +155,7 @@ public class RateFragment extends Fragment{
                             Movie.getReleaseDate(),
                             Movie.getImagePath(),
                             heartRates);
+
 
                     LibraryFragment.setFirstLoad(true);
 
@@ -148,6 +169,11 @@ public class RateFragment extends Fragment{
 
             return rootView;
         }
+
+    public int makeRandomNum(int low, int high){
+        int r = (int) (Math.random() * (high - low)) + low;
+        return r;
+    }
 
 
 
