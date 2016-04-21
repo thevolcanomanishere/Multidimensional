@@ -1,6 +1,7 @@
 package com.digitalnatives.tabtest.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +48,7 @@ public class ChartView extends AppCompatActivity {
         mChart.setTouchEnabled(false);
 
         LineDataSet heartRateSet = new LineDataSet(data, "Heart Rates");
+        heartRateSet.setColor(Color.RED);
         heartRateSet.setAxisDependency(YAxis.AxisDependency.LEFT);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
@@ -60,6 +62,10 @@ public class ChartView extends AppCompatActivity {
 
         LineData lineData = new LineData(xVals, dataSets);
         mChart.setData(lineData);
+        mChart.setBackgroundColor(Color.GRAY);
+        mChart.animateXY(2000, 2000);
+        mChart.animateX(1000);
+
         mChart.invalidate();
 
     }

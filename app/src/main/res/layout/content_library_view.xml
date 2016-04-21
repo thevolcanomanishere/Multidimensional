@@ -24,11 +24,10 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="131dp"
+                android:layout_height="155dp"
                 android:id="@+id/libraryViewPoster"
-                android:layout_weight="1"
-                android:src="@drawable/monsters"
+                android:src="@drawable/nopicture"
                 android:nestedScrollingEnabled="false" />
 
             <LinearLayout
@@ -41,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Monsters Inc"
+                    android:text=""
                     android:id="@+id/libViewMovieName" />
 
                 <TextView
@@ -49,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text=""
+                    android:textSize="15sp"
                     android:id="@+id/releaseDate" />
 
                 <TextView
@@ -56,21 +56,25 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text=""
+                    android:textSize="15sp"
+                    android:id="@+id/movieBudget" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text=""
+                    android:textSize="15sp"
                     android:id="@+id/imdbRating" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text=""
-                    android:id="@+id/grossMoney" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text=""
-                    android:id="@+id/textView4" />
+                    android:textSize="11sp"
+                    android:id="@+id/descriptionText" />
             </LinearLayout>
 
 
@@ -79,8 +83,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="175dp">
 
 
             <Button

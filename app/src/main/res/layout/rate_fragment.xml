@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:id="@+id/RateFragLinear"
     android:layout_height="match_parent">
 
@@ -10,6 +17,11 @@
         android:layout_height="match_parent"
         android:layout_margin="30dp"
         android:text="Add a movie from the Search Tab"/>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -106,7 +118,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:id="@+id/linear2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -119,7 +131,7 @@
             android:layout_margin="5dp"
             android:background="@drawable/roundedcorner"
             android:textColor="#ffffff"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_vertical" />
 
         <Button
             android:layout_width="wrap_content"
@@ -128,8 +140,8 @@
             android:id="@+id/saveButton"
             android:background="@drawable/roundedcorner"
             android:textColor="#ffffff"
-            android:layout_gravity="center_horizontal" />
-
-
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
+
 </LinearLayout>
+</ScrollView>

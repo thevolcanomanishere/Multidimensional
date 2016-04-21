@@ -6,7 +6,7 @@ package com.digitalnatives.tabtest;
 public class ApiConfig {
 
 
-    private static boolean devMode = true;
+    private static boolean devMode = false;
 
     public static String BASE_URL = "https://pacific-escarpment-20911.herokuapp.com/";
     public static String DEV_URL = "https://nodejsandroidserver-thevolcanomanishere.c9users.io/";
@@ -38,6 +38,16 @@ public class ApiConfig {
 
 
     private static String BASE_TMDB_INFO_URL = "http://api.themoviedb.org/3/search/movie";
+
+    public static String getBaseTmdbMovieId() {
+        return BASE_TMDB_MOVIE_ID;
+    }
+
+    public static void setBaseTmdbMovieId(String baseTmdbMovieId) {
+        BASE_TMDB_MOVIE_ID = baseTmdbMovieId;
+    }
+
+    private static String BASE_TMDB_MOVIE_ID = "http://api.themoviedb.org/3/movie/";
     private static String TMDB_KEY = "?api_key=72508de530eba41fb571b4a5b10dd99b";
 
 

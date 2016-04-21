@@ -169,7 +169,7 @@ public class LibraryFragment extends Fragment{
                                         for (int i = 0; i < moviesArray.length(); i++) {
                                             JSONObject childObject = moviesArray.getJSONObject(i);
                                             String movieName = childObject.getString("movieName");
-//                                            int movieId = childObject.getInt("id");
+                                            int movieId = childObject.getInt("movieId");
 //                                            Log.d(TAG, "Movie id = " + movieId);
                                             String overview = childObject.getString("overview");
                                             String releaseDate = childObject.getString("releaseDate");
@@ -191,6 +191,7 @@ public class LibraryFragment extends Fragment{
                                             int heartRateInt = (int) (heartRateAverageDouble + 0.5);
 
                                             libraryList.add(new LibraryItem(overview,
+                                                    movieId,
                                                     posterPath,
                                                     movieName,
                                                     releaseDate,

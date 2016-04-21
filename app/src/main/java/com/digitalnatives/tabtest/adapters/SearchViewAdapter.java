@@ -98,6 +98,7 @@ public class SearchViewAdapter extends RecyclerView.Adapter<SearchViewAdapter.Mo
                 Movie.setReleaseDate(mi.getRelease_date());
                 Movie.setDescription(mi.getOverview());
                 Movie.setImagePath(mi.getPoster_path());
+                Movie.setId(mi.getId());
 
 
                 RateFragment.setHasLoaded(true);

@@ -92,6 +92,7 @@ public class LibraryViewAdapter extends RecyclerView.Adapter<LibraryViewAdapter.
                 Bundle bundle = new Bundle();
                 bundle.putString("movieName", mi.getName());
                 bundle.putInt("id", mi.getId());
+                Log.d("LIBADAPT", "id = " + mi.getId());
                 bundle.putString("description", mi.getDescription());
                 bundle.putString("releaseDate", mi.getReleaseDate());
                 bundle.putString("posterPath", mi.getImage_url());
